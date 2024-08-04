@@ -3,7 +3,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import { User } from './models/userRegister.model';
 import { dbConnect } from './configs/database.config';
-
+import { Feed } from './models/feed.model';
 dbConnect();
 
 
@@ -54,6 +54,17 @@ app.post('/api/pro/login', async(req, resp) => {
         resp.status(500).send('Server error');
     }
 });
+
+app.post('/api/pro/post', async(req, resp) => {
+    try {
+        const newPost = req.body;
+        const post = new Feed(newPost);
+        await post.save()
+        resp.status(200).json(newPost);
+    } catch (error) {
+      resp.status(500).json({ message: 'An error occurred while creating the post.' });
+    }
+})
 
 app.listen(PORT, () => {
     console.log("website is running on http://localhost:", PORT);

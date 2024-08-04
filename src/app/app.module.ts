@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/partials/register/register.component';
+import { FeedComponent } from './components/pages/feed/feed.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { RegisterComponent } from './components/partials/register/register.compo
     AppComponent,
     HeaderComponent,
     LoginPageComponent,
-    RegisterComponent
+    RegisterComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,
