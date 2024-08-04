@@ -21,6 +21,7 @@ export class CreatePostComponent implements OnInit {
   ngOnInit(): void {
     let currentUser = this._userService.getCurrentUser();
     this.createPostForm = this._fb.group({
+      id: [currentUser._id],
       author: [currentUser.name],
       description: ['', [Validators.required]],
       timestamp: [new Date()],

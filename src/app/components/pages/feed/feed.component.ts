@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FeedService } from '../../../services/feed.service';
 import { Observable } from 'rxjs';
 import { IFeed } from '../../../interfaces/feedInterface';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-feed',
@@ -29,9 +30,10 @@ export class FeedComponent implements OnInit {
 
   feedTask!: IFeed[]
 
-  constructor(private _feedService: FeedService) {
+  constructor(private _feedService: FeedService, private _userService: UserService) {
+    let currentUser = this._userService.getCurrentUser()
     let taskObservable: Observable<any>
-    taskObservable = this._feedService.getPost();
+    taskObservable = this._feedService.getPost(currentUser._id);
     taskObservable.subscribe((serverResponse: any) => {
       this.feedTask = serverResponse;
     })

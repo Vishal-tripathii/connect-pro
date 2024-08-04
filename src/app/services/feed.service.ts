@@ -25,8 +25,8 @@ export class FeedService {
       })
     );
   }
-  getPost(): Observable<IFeed> {
-    return this._http.get<IFeed>(GET_POSTS).pipe(
+  getPost(userId: string): Observable<IFeed> {
+    return this._http.get<IFeed>(`${GET_POSTS}?userId=${userId}`).pipe(
       tap({
         next: (posts) => {
           console.log("fetched posts", posts);

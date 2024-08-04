@@ -57,7 +57,8 @@ app.post('/api/pro/login', async(req, resp) => {
 
 app.get('/api/pro/getPosts', async(req, resp) => {
     try {
-        const post = await Feed.find()
+        const {userId} = req.query;
+        const post = await Feed.find({id: userId})
         resp.json(post);
     } catch (error) {
         resp.status(500).send(error)

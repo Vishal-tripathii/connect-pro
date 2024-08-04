@@ -7,6 +7,7 @@ interface Comment {
 }
 
 export interface Feed {
+  id: string
   author: string;
   description: string;
   timestamp: string;
@@ -21,6 +22,7 @@ const commentSchema = new Schema<Comment>({
 });
 
 const feedSchema = new Schema<Feed>({
+  id: {type: String, required: true},
   author: { type: String, required: true },
   description: { type: String, required: true },
   timestamp: { type: String, required: true },
