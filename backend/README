@@ -1,0 +1,18 @@
+for settring up backend for angular, 
+Create a backend folder
+-npm init -y, npm install typescript
+-add a new tsconfig.json file and paste the code there
+-create a src folder inside backed folder
+-create a gitignore file inside backend folder and add node-modules there
+-add the data to the backednd inside src -> data.ts and define any at this point necause we need dofferent configs for the data types in backend
+-npm install express cors
+-creating server.ts file inside src folder -> server.ts
+-npm i --save-dev @types/express
+-npm i @types/cors
+tell cors to accept the request from my localhost 4200
+-npm install ts-node --save-dev
+--npm install nodemon --save-dev
+
+now in package.json(backend), add start script inside script -> "start": "cd src && nodemon server.ts",
+
+this is basics to start backend
