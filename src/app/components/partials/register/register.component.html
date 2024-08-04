@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="details">
+      <h1>Register</h1>
+      <form [formGroup]="registerForm" (ngSubmit)="submit()">
+        <div class="input-container">
+          <label>Name</label>
+          <div>
+            <input type="text" placeholder="Name" formControlName="name">
+          </div>
+          <div class="error-list" *ngIf="fc.name.errors && isSubmitted">
+            <div *ngIf="fc.name.errors.required">Should not be empty</div>
+          </div>
+        </div>
+  
+        <div class="input-container">
+          <label>Email</label>
+          <div>
+            <input type="email" placeholder="Email" formControlName="email">
+          </div>
+          <div class="error-list" *ngIf="fc.email.errors && isSubmitted">
+            <div *ngIf="fc.email.errors.required">Should not be empty</div>
+            <div *ngIf="fc.email.errors.email">Email is not correct</div>
+          </div>
+        </div>
+  
+        <div class="input-container">
+          <label>Password</label>
+          <div>
+            <input type="password" placeholder="Password" formControlName="password">
+          </div>
+          <div class="error-list" *ngIf="fc.password.errors && isSubmitted">
+            <div *ngIf="fc.password.errors.required">Should not be empty</div>
+          </div>
+        </div>
+  
+        <div class="button">
+          <button type="submit">Register</button>
+          <div class="login">
+            Already a user?
+            <a routerLink="">Login Here</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  
