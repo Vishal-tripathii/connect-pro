@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FeedService } from '../../../services/feed.service';
+import { Observable } from 'rxjs';
+import { IFeed } from '../../../interfaces/feedInterface';
 
 @Component({
   selector: 'app-feed',
@@ -23,9 +26,18 @@ export class FeedComponent implements OnInit {
         },
       ]
     }
-  
 
-  constructor() {}
+  feedTask!: IFeed[]
+
+  constructor(private _feedService: FeedService) {
+    let taskObservable: Observable<any>
+    taskObservable = this._feedService.getPost();
+    taskObservable.subscribe((serverResponse: any) => {
+      this.feedTask = serverResponse;
+    })
+
+
+  }
 
   ngOnInit(): void {
   }

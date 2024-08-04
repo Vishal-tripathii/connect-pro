@@ -1,0 +1,9 @@
+added getPost method to get all the post irrespective of userId filtering
+added createPost method to post data to db
+created schemas for the same
+changed header to get currentUser
+in header, opening the popup to create the task
+
+-
+need to handle the comments
+need to filter the task based on userId

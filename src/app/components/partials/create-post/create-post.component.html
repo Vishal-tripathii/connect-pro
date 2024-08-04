@@ -1,0 +1,13 @@
+<div class="container">
+    <form [formGroup]="createPostForm" (ngSubmit)="submit()">
+        <label for="description">
+            Add content:
+            <input type="text" id="description" placeholder="Write anything..." formControlName="description">
+        </label>
+        <div class="action-container">
+            <button type="submit" [disabled]="!createPostForm.dirty || !createPostForm.valid" class="submit-btn">Create
+                Task</button>
+            <button type="button" (click)="cancel()" class="cancel-btn">Cancel</button>
+        </div>
+    </form>
+</div>

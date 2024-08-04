@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/partials/register/register.component';
 import { FeedComponent } from './components/pages/feed/feed.component';
+import { CreatePostComponent } from './components/partials/create-post/create-post.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { FeedComponent } from './components/pages/feed/feed.component';
     HeaderComponent,
     LoginPageComponent,
     RegisterComponent,
-    FeedComponent
+    FeedComponent,
+    CreatePostComponent
   ],
   imports: [
     BrowserModule,

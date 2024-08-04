@@ -1,4 +1,4 @@
-export interface Comment {
+export interface Comments {
     id: string;
     author: string;
     content: string;

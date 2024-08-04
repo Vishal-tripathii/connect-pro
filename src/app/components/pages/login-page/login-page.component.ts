@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +13,9 @@ export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
   isSubmitted = false;
 
-  constructor(private _fb: FormBuilder, private _userService: UserService) {}
+  constructor(private _fb: FormBuilder,
+    private _userService: UserService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this.loginForm = this._fb.group({
@@ -27,10 +30,10 @@ export class LoginPageComponent implements OnInit {
 
   submit() {
     this.isSubmitted = true;
-    if(this.loginForm.invalid) return;
+    if (this.loginForm.invalid) return;
     this._userService.loginUser({ email: this.fc.email.value, password: this.fc.password.value }).subscribe({
       next: (user) => {
-        console.log("sucessfull", user);
+        this._router.navigate(['/feed'])
       },
       error: (error) => {
         console.log("error in logging", error);
