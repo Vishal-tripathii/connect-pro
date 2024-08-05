@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginPageComponent } from './components/pages/login-page/login-page.component';
 import { RegisterComponent } from './components/partials/register/register.component';
 import { FeedComponent } from './components/pages/feed/feed.component';
+import { UserProfileComponent } from './components/pages/user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'feed',
     component: FeedComponent
+  },
+  {
+    path: 'user-profile/:userId',
+    component: UserProfileComponent
   }
 ];
 

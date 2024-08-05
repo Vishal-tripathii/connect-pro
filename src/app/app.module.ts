@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/partials/register/register.compo
 import { FeedComponent } from './components/pages/feed/feed.component';
 import { CreatePostComponent } from './components/partials/create-post/create-post.component';
 import { SearchComponent } from './components/partials/search/search.component';
+import { UserProfileComponent } from './components/pages/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SearchComponent } from './components/partials/search/search.component';
     RegisterComponent,
     FeedComponent,
     CreatePostComponent,
-    SearchComponent
+    SearchComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

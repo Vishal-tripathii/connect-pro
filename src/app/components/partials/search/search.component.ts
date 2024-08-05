@@ -1,5 +1,6 @@
 import { P } from '@angular/cdk/keycodes';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +11,7 @@ export class SearchComponent implements OnInit {
 
   @Output() searchEmitter = new EventEmitter();
   @Input() searchResult!: any
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
   }
@@ -18,8 +19,8 @@ export class SearchComponent implements OnInit {
   search(term: string) {
     this.searchEmitter.emit(term)
   }
-  onClick(currentUser: string) {
-    console.log(currentUser, "IDDSs");
+  onClick(_id: string) {
+    this._router.navigate(['user-profile', _id])
   }
 
 }
