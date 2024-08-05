@@ -21,11 +21,11 @@ app.use(
 app.use(express.json()); // To parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // To parse URL-encoded bodies
 
-app.post('/api/pro/register', async(req, resp) => {
+app.post('/api/pro/register', async (req, resp) => {
     try {
         const newUser = req.body;
-        const checkExistingUsers = await User.findOne({email: newUser.email});
-        if(checkExistingUsers) {
+        const checkExistingUsers = await User.findOne({ email: newUser.email });
+        if (checkExistingUsers) {
             return resp.status(500).send("user already exists")
         }
         const user = new User(newUser);
@@ -38,7 +38,7 @@ app.post('/api/pro/register', async(req, resp) => {
     }
 });
 
-app.post('/api/pro/login', async(req, resp) => {
+app.post('/api/pro/login', async (req, resp) => {
     const { email, password } = req.body;
     try {
         const user = await User.findOne({ email: email });
@@ -55,28 +55,28 @@ app.post('/api/pro/login', async(req, resp) => {
     }
 });
 
-app.get('/api/pro/getPosts', async(req, resp) => {
+app.get('/api/pro/getPosts', async (req, resp) => {
     try {
-        const {userId} = req.query;
-        const post = await Feed.find({id: userId})
+        const { userId } = req.query;
+        const post = await Feed.find({ id: userId })
         resp.json(post);
     } catch (error) {
         resp.status(500).send(error)
     }
 })
 
-app.post('/api/pro/post', async(req, resp) => {
+app.post('/api/pro/post', async (req, resp) => {
     try {
         const newPost = req.body;
         const post = new Feed(newPost);
         await post.save()
         resp.status(200).json(newPost);
     } catch (error) {
-      resp.status(500).json({ message: 'An error occurred while creating the post.' });
+        resp.status(500).json({ message: 'An error occurred while creating the post.' });
     }
 });
 
-app.get('/api/pro/getExistingUsers', async(req, resp) => {
+app.get('/api/pro/getExistingUsers', async (req, resp) => {
     try {
         const allUsers = await User.find();
         resp.json(allUsers);
@@ -85,7 +85,29 @@ app.get('/api/pro/getExistingUsers', async(req, resp) => {
     }
 });
 
+app.post('/api/pro/follow', async (req, resp) => {
+    try {
+        const { followId, userId } = req.body;
+        console.log(userId, followId, "peeorkoerhwiug");
+        const currentUser = await User.findById(userId); // find the currentUser
+        const userToFollow = await User.findById(followId); // find the user to follow
+        console.log(userToFollow);
+
+        if (!currentUser || !userToFollow) {
+            resp.status(500).send("no user found, error!!!")
+        }
+        // check if user is already in following list, if not then push to it
+        if (!currentUser?.following.includes(followId)) {
+            currentUser?.following.push(followId)
+            await currentUser?.save();
+        }
+        resp.status(200).send('User followed successfully');
+    } catch (error) {
+        resp.status(500).send(error);
+    }
+})
+
 app.listen(PORT, () => {
     console.log("website is running on http://localhost:", PORT);
-    
+
 })

@@ -1,15 +1,17 @@
-import mongoose, { Model, Schema } from "mongoose";
+import mongoose, { Model, mongo, Schema } from "mongoose";
 
 export interface IUserRegister {
     name: string;
     email: string;
     password: string;
+    following: mongoose.Types.ObjectId[];
 }
 
-export const userSchema = new Schema<IUserRegister>({
-    name: {type: String, required: true},
-    email: {type: String, required: true},
-    password: {type: String, required: true}
-})
+const userSchema: Schema<IUserRegister> = new Schema({
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    following: [{ type: Schema.Types.ObjectId, ref: 'User' }] // Properly define the followers field
+});
 
 export const User = mongoose.model('User', userSchema);

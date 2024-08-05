@@ -1,7 +1,10 @@
 <div class="user-menu-container">
     <div class="profile-section">
         <div class="profile-card">
-            <h2>User Profile</h2>
+            <div class="profile-header">
+                <h2>User Profile</h2>
+                <button class="follow-button" (click)="follow()">Follow</button>
+            </div>
             <div class="profile-info" *ngIf="userData">
                 <p><strong>Name:</strong> {{ userProfile.name }}</p>
                 <p><strong>Email:</strong> {{ userProfile.email }}</p>
@@ -10,7 +13,7 @@
     </div>
     <h2 style="text-align: center;">My Posts</h2>
     <div class="task-container" *ngFor="let item of userData">
-        
+
         <div class="task-section">
             <app-post-card [post]="item"></app-post-card>
         </div>

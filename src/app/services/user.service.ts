@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserLogin } from '../interfaces/userInterface';
 import { IUserRegister } from '../interfaces/registerInterface';
-import { GET_EXISTING_USERS, LOGIN_URL, REGISTER_URL } from '../constants/urls';
+import { FOLLOW_URL, GET_EXISTING_USERS, LOGIN_URL, REGISTER_URL } from '../constants/urls';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { IUserLogin } from '../../../backend/src/models/user.model';
 
@@ -24,7 +24,7 @@ export class UserService {
 
   getCurrentUser(): any {
     console.log(this.userSubject.value);
-    
+
     return this.userSubject.value;
   }
 
@@ -33,7 +33,7 @@ export class UserService {
       tap({
         next: (user) => {
           console.log("Successful Rgister", user);
-         
+
         },
         error: (err) => {
           console.log("Error:", err);
@@ -78,6 +78,19 @@ export class UserService {
       return of(this.existingUsers?.filter((item: any) => item.name.toLowerCase().includes(input.toLowerCase())))
     }
     return of([])
+  }
+
+  follow(followId: string, userId: string): Observable<any> {
+    return this._http.post<any>(FOLLOW_URL, { followId: followId, userId: userId }).pipe(
+      tap({
+        next: (user) => {
+          console.log("followed :", user.name);
+        },
+        error: (err) => {
+          console.log(err, "error in flloing");
+        }
+      })
+    )
   }
 
 }

@@ -13,6 +13,7 @@ export class UserProfileComponent implements OnInit {
   userId!: any;
   userData!: any;
   userProfile!: any
+  currentUser!: any;
 
 
   constructor(private _activatedRoutes: ActivatedRoute,
@@ -20,6 +21,7 @@ export class UserProfileComponent implements OnInit {
     private _userService: UserService) { }
 
   ngOnInit(): void {
+    this.currentUser = this._userService.getCurrentUser();
     this._activatedRoutes.params.subscribe((resp: any) => { // This logic bcan be refactored later, // pls do it
       this.userId = resp.userId;
     });
@@ -27,6 +29,8 @@ export class UserProfileComponent implements OnInit {
     // first fetching the users of the userId;
     this._userService.getExistingUsers().subscribe((r: any) => {
       this.userProfile = r.find((item: any) => item._id === this.userId)
+      console.log(this.userProfile);
+
     });
 
     // fetching users data
@@ -34,6 +38,12 @@ export class UserProfileComponent implements OnInit {
       this.userData = resp;
     })
 
+  }
+
+  follow() {
+    this._userService.follow(this.userProfile._id, this.currentUser._id).subscribe((resp: any) => {
+      console.log("folowrd seucfully", resp);
+    })
   }
 
 }
