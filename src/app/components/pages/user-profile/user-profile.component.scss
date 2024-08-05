@@ -61,3 +61,15 @@
 .follow-button:hover {
     background-color: #3e8e41;
 }
+.unfollow-button {
+    background-color: #dc3545;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.unfollow-button:hover {
+    background-color: #c82333;
+}

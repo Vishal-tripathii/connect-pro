@@ -3,9 +3,10 @@
         <div class="profile-card">
             <div class="profile-header">
                 <h2>User Profile</h2>
-                <button class="follow-button" (click)="follow()">Follow</button>
+                <button class="follow-button" [disabled]="isFollowing" 
+                (click)="follow()">{{isFollowing ? 'Following' : 'Follow'}}</button>
             </div>
-            <div class="profile-info" *ngIf="userData">
+            <div class="profile-info" *ngIf="userProfile">
                 <p><strong>Name:</strong> {{ userProfile.name }}</p>
                 <p><strong>Email:</strong> {{ userProfile.email }}</p>
             </div>

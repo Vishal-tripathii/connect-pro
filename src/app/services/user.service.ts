@@ -84,7 +84,11 @@ export class UserService {
     return this._http.post<any>(FOLLOW_URL, { followId: followId, userId: userId }).pipe(
       tap({
         next: (user) => {
-          console.log("followed :", user.name);
+          console.log("followed :", user); 
+          // we need to update the localstorage as well
+          const currentUser = this.getCurrentUser();
+          currentUser.following.push(followId);
+          this.setUserToLocalStorage(currentUser);
         },
         error: (err) => {
           console.log(err, "error in flloing");

@@ -94,16 +94,16 @@ app.post('/api/pro/follow', async (req, resp) => {
         console.log(userToFollow);
 
         if (!currentUser || !userToFollow) {
-            resp.status(500).send("no user found, error!!!")
+            resp.status(404).json({ error: "User not found" });
+        } else if (currentUser.following.includes(followId)) {
+            resp.status(400).json({ error: "User is already in your following list" });
+        } else {
+            currentUser.following.push(followId)
+            await currentUser.save();
+            resp.status(200).json({ message: 'User followed successfully' });
         }
-        // check if user is already in following list, if not then push to it
-        if (!currentUser?.following.includes(followId)) {
-            currentUser?.following.push(followId)
-            await currentUser?.save();
-        }
-        resp.status(200).send('User followed successfully');
     } catch (error) {
-        resp.status(500).send(error);
+        resp.status(500).json({ error: error });
     }
 })
 

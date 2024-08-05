@@ -14,6 +14,7 @@ export class UserProfileComponent implements OnInit {
   userData!: any;
   userProfile!: any
   currentUser!: any;
+  isFollowing!: boolean;
 
 
   constructor(private _activatedRoutes: ActivatedRoute,
@@ -29,20 +30,27 @@ export class UserProfileComponent implements OnInit {
     // first fetching the users of the userId;
     this._userService.getExistingUsers().subscribe((r: any) => {
       this.userProfile = r.find((item: any) => item._id === this.userId)
-      console.log(this.userProfile);
+      // since getExistingUsers is async function, it neeeds to be here only
+      this.isFollowing = this.currentUser?.following?.includes(this.userProfile?._id);
 
     });
-
+    
     // fetching users data
     this._feedService.getPost(this.userId).subscribe((resp: any) => {
       this.userData = resp;
     })
-
+    
   }
 
   follow() {
-    this._userService.follow(this.userProfile._id, this.currentUser._id).subscribe((resp: any) => {
-      console.log("folowrd seucfully", resp);
+    this._userService.follow(this.userProfile._id, this.currentUser._id).subscribe({
+      next: () => {
+        this.isFollowing = true;
+        this.currentUser.following.push(this.userProfile?._id);
+      },
+      error: (err) => {
+        console.log("Already following");
+      }
     })
   }
 

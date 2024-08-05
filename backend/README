@@ -19,3 +19,14 @@ this is basics to start backend
 
 ---------------------------
 intergrated user serach
+--------------------------
+integrated follow login and simutneously updating UI
+-creatd post call with currentId and Id of person to follow
+-created method in service for the same
+-updating the localstorage also in method
+
+-in user-profile component, added follow method and subscribing to the bckend-call 
+-changing the isFollowing flag upon following and unfollowing
+-keeping the flag inide asynsrounus function so hat it updates corrctly
+
+-also corrected te backend call, it was not proper
