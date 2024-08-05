@@ -5,6 +5,9 @@
       <ul>
         <!-- Show login link only when the user is not logged in -->
         <li *ngIf="user">
+          <app-search (searchEmitter)="handleSearch($event)" [searchResult]="searchResults"></app-search>
+        </li>
+        <li *ngIf="user">
           <a (click)="createPost()">Create-Post</a>
         </li>
         <li *ngIf="!user">
@@ -12,7 +15,7 @@
         </li>
 
         <!-- Show username and menu when user is logged in -->
-        <li class="menu-container">
+        <li class="menu-container" *ngIf="user">
           <a>{{user?.name}}</a>
           <div class="menu">
             <!-- <a routerLink="/profile">Profile</a> -->

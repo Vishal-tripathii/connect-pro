@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
 
   user: any;
+  searchResults!: any;
 
   constructor(private _userService: UserService,
     public dialogRef: MatDialog,
@@ -49,6 +50,17 @@ export class HeaderComponent implements OnInit {
   logout() {
     this._userService.logout();
     this._router.navigate([''])
+  }
+
+  handleSearch(term: any) {
+    if (term) {
+      this._userService.searchExisitingUser(term).subscribe((Resp: any) => {
+        this.searchResults = Resp;
+      });
+    }
+    else {
+      this.searchResults = []
+    }
   }
 
 }

@@ -74,7 +74,16 @@ app.post('/api/pro/post', async(req, resp) => {
     } catch (error) {
       resp.status(500).json({ message: 'An error occurred while creating the post.' });
     }
-})
+});
+
+app.get('/api/pro/getExistingUsers', async(req, resp) => {
+    try {
+        const allUsers = await User.find();
+        resp.json(allUsers);
+    } catch (error) {
+        resp.status(500).send("Error fetching allUsers")
+    }
+});
 
 app.listen(PORT, () => {
     console.log("website is running on http://localhost:", PORT);

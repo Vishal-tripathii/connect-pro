@@ -16,3 +16,6 @@ tell cors to accept the request from my localhost 4200
 now in package.json(backend), add start script inside script -> "start": "cd src && nodemon server.ts",
 
 this is basics to start backend
+
+---------------------------
+intergrated user serach

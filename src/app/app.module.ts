@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './components/partials/register/register.component';
 import { FeedComponent } from './components/pages/feed/feed.component';
 import { CreatePostComponent } from './components/partials/create-post/create-post.component';
+import { SearchComponent } from './components/partials/search/search.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CreatePostComponent } from './components/partials/create-post/create-po
     LoginPageComponent,
     RegisterComponent,
     FeedComponent,
-    CreatePostComponent
+    CreatePostComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
