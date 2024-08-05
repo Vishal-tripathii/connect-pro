@@ -1,21 +1,5 @@
 <!-- post.component.html -->
 <div class="post" *ngFor="let post of feedTask">
-    <div class="post-header">
-      <!-- <img [src]="post.authorProfilePicture" alt="Profile Picture" class="profile-picture"> -->
-      <div class="post-author">{{ post.author }}</div>
-      <div class="post-timestamp">{{ post.timestamp | date:'short' }}</div>
-    </div>
-    <div class="post-content">{{ post.description }}</div>
-    <div class="post-actions">
-      <button>Like ({{ post.likes }})</button>
-      <button>Share</button>
-    </div>
-    <div class="post-comments">
-      <div *ngFor="let comment of post.comments" class="comment">
-        <div class="comment-author">{{ comment.author }}</div>
-        <div class="comment-content">{{ comment.content }}</div>
-        <div class="comment-timestamp">{{ comment.timestamp | date:'short' }}</div>
-      </div>
-    </div>
+    <app-post-card [post]="post"></app-post-card>
   </div>
   

@@ -8,31 +8,11 @@
             </div>
         </div>
     </div>
-
-    <div class="task-container">
-        <h2>Task List</h2>
-        <ul>
-            <li *ngFor="let item of userData">
-                <div class="task-section">
-                    <div class="post-header">
-                        <!-- <img [src]="post.authorProfilePicture" alt="Profile Picture" class="profile-picture"> -->
-                        <div class="post-author">{{ item.author }}</div>
-                        <div class="post-timestamp">{{ item.timestamp | date:'short' }}</div>
-                    </div>
-                    <div class="post-content">{{ item.description }}</div>
-                    <div class="post-actions">
-                        <button>Like ({{ item.likes }})</button>
-                        <button>Share</button>
-                    </div>
-                    <div class="post-comments">
-                        <div *ngFor="let comment of item.comments" class="comment">
-                            <div class="comment-author">{{ comment.author }}</div>
-                            <div class="comment-content">{{ comment.content }}</div>
-                            <div class="comment-timestamp">{{ comment.timestamp | date:'short' }}</div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <h2 style="text-align: center;">My Posts</h2>
+    <div class="task-container" *ngFor="let item of userData">
+        
+        <div class="task-section">
+            <app-post-card [post]="item"></app-post-card>
+        </div>
     </div>
 </div>

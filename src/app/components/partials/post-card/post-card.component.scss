@@ -1,0 +1,59 @@
+.app-post-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    height: 50px;
+    margin-right: 15px;
+    width: 50px;
+}
+
+.post-author {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.post-timestamp {
+    color: #888;
+    font-size: 0.9em;
+}
+
+.post-content {
+    font-size: 1.1em;
+    line-height: 1.6em;
+    margin-bottom: 15px;
+}
+
+.post-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 15px;
+}
+
+.like-button,
+.comment-button {
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    padding: 10px 15px;
+}
+
+.like-button:hover,
+.comment-button:hover {
+    background-color: #0056b3;
+}

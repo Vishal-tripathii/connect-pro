@@ -17,6 +17,7 @@ import { FeedComponent } from './components/pages/feed/feed.component';
 import { CreatePostComponent } from './components/partials/create-post/create-post.component';
 import { SearchComponent } from './components/partials/search/search.component';
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component';
+import { PostCardComponent } from './components/partials/post-card/post-card.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UserProfileComponent } from './components/pages/user-profile/user-profi
     FeedComponent,
     CreatePostComponent,
     SearchComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,
