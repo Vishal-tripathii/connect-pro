@@ -58,7 +58,10 @@ app.post('/api/pro/login', async (req, resp) => {
 app.get('/api/pro/getPosts', async (req, resp) => {
     try {
         const { userId } = req.query;
-        const post = await Feed.find({ id: userId })
+        const user = await User.findById(userId).populate('following')
+        const followingUserIds = user?.following.map((item) => item._id) || []; // might be empty so we need to define in advance
+        const all_ids = [userId, ... followingUserIds]
+        const post = await Feed.find({ id: {$in: all_ids} }) // We use the $in operator to fetch data from the Feed table for all these IDs.
         resp.json(post);
     } catch (error) {
         resp.status(500).send(error)
