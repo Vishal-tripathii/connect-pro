@@ -54,4 +54,18 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
+  unfollow() {
+    console.log("unfollowed clickeds");
+    
+    this._userService.unfollow(this.userProfile._id, this.currentUser._id).subscribe({
+      next: () => {
+        this.isFollowing = false;
+        const index = this.currentUser.following.findIndex((item: any) => item._id === this.userProfile._id);
+        if (index !== -1) {
+          this.currentUser.following.splice(index, 1);
+        }
+      }
+    });
+  }
+
 }

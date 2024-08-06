@@ -5,6 +5,7 @@
                 <h2>User Profile</h2>
                 <button class="follow-button" [disabled]="isFollowing" 
                 (click)="follow()">{{isFollowing ? 'Following' : 'Follow'}}</button>
+                <button *ngIf="isFollowing"(click)="unfollow()">Unfollow </button>
             </div>
             <div class="profile-info" *ngIf="userProfile">
                 <p><strong>Name:</strong> {{ userProfile.name }}</p>

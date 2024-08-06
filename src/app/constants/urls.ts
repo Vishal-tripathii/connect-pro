@@ -7,3 +7,4 @@ export const POST_URL = PRO_URL + "/post"
 export const GET_POSTS = PRO_URL + "/getPosts"
 export const GET_EXISTING_USERS = PRO_URL + "/getExistingUsers";
 export const FOLLOW_URL = PRO_URL + "/follow"
+export const UNFOLLOW_URL = PRO_URL + "/unfollow"

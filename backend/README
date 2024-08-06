@@ -30,3 +30,12 @@ integrated follow login and simutneously updating UI
 -keeping the flag inide asynsrounus function so hat it updates corrctly
 
 -also corrected te backend call, it was not proper
+
+
+================================
+
+-added unfollow logic  but it seems to be repetative because it is same as follow
+-will rfator thi flo later
+-flow matchs with follow logic, so i will create same methododlogy for it
+-tonic said there is pipeline method wich will not reuire to find userId and follow ID and will update my databae without using js functions, i will try it in refactoing)
+

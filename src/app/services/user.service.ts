@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserLogin } from '../interfaces/userInterface';
 import { IUserRegister } from '../interfaces/registerInterface';
-import { FOLLOW_URL, GET_EXISTING_USERS, LOGIN_URL, REGISTER_URL } from '../constants/urls';
+import { FOLLOW_URL, GET_EXISTING_USERS, LOGIN_URL, REGISTER_URL, UNFOLLOW_URL } from '../constants/urls';
 import { BehaviorSubject, Observable, of, tap } from 'rxjs';
 import { IUserLogin } from '../../../backend/src/models/user.model';
 
@@ -84,7 +84,7 @@ export class UserService {
     return this._http.post<any>(FOLLOW_URL, { followId: followId, userId: userId }).pipe(
       tap({
         next: (user) => {
-          console.log("followed :", user); 
+          console.log("followed :", user);
           // we need to update the localstorage as well
           const currentUser = this.getCurrentUser();
           currentUser.following.push(followId);
@@ -92,6 +92,24 @@ export class UserService {
         },
         error: (err) => {
           console.log(err, "error in flloing");
+        }
+      })
+    )
+  }
+  unfollow(followId: string, userId: string): Observable<any> {
+    return this._http.post<any>(UNFOLLOW_URL, { followId: followId, userId: userId }).pipe(
+      tap({
+        next: (user) => {
+          const currentUser = this.getCurrentUser();
+          const index = currentUser.following.findIndex((item: any) => item._id === followId);
+          if (index !== -1) {
+            currentUser.following.splice(index, 1);
+            this.setUserToLocalStorage(currentUser)
+          }
+        },
+        error: (error) => {
+          console.log("Error in Unfollowing user: ", error);
+
         }
       })
     )
