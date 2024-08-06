@@ -35,7 +35,7 @@ export class FeedComponent implements OnInit {
     let taskObservable: Observable<any>
     taskObservable = this._feedService.getPost(currentUser._id);
     taskObservable.subscribe((serverResponse: any) => {
-      this.feedTask = serverResponse;
+      this.sortPostsByTime(serverResponse)
     })
 
 
@@ -44,4 +44,12 @@ export class FeedComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  sortPostsByTime(posts: IFeed[]) {
+    posts.sort((a, b) => {
+      const dateA = new Date(a.timestamp);
+      const dateB = new Date(b.timestamp);
+      return dateB.getTime() - dateA.getTime();
+    });
+    this.feedTask = posts;
+  }
 }
