@@ -39,3 +39,9 @@ integrated follow login and simutneously updating UI
 -flow matchs with follow logic, so i will create same methododlogy for it
 -tonic said there is pipeline method wich will not reuire to find userId and follow ID and will update my databae without using js functions, i will try it in refactoing)
 
+-------------------------------------
+added Likes login
+so basically, adding directly the users who liked the post is bettr approach
+bechause then i can have validation in frontend tht wheter i liked this post or not
+if not, will show different UI, if yes then how diffrent UI
+also, need to add unfollow logic
