@@ -22,11 +22,11 @@ const commentSchema = new Schema<Comment>({
 });
 
 const feedSchema = new Schema<Feed>({
-  id: {type: String, required: true},
+  id: { type: String, required: true },
   author: { type: String, required: true },
   description: { type: String, required: true },
   timestamp: { type: String, required: true },
-  likes: { type: Number, default: 0 },
+  likes: [{ count: { type: Number, default: 1 }, userId: { type: String } }],
   comments: { type: [commentSchema], default: [] },
 });
 

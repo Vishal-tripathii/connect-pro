@@ -131,6 +131,18 @@ app.post('/api/pro/unfollow', async (req, res) => {
     }
 });
 
+app.post("/api/pro/likePost", async (req, res) => {
+    try {
+        const { postId, userId } = req.body;
+        const likeObject = { count: 1, userId: userId };
+        await Feed.updateOne({ _id: postId }, { $push: { likes: likeObject } });
+        res.json({ message: "Post liked successfully" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to like post" });
+    }
+});
+
 app.listen(PORT, () => {
     console.log("website is running on http://localhost:", PORT);
 

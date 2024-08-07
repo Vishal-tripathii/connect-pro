@@ -26,7 +26,7 @@ export class CreatePostComponent implements OnInit {
       description: ['', [Validators.required]],
       timestamp: [new Date()],
       comments: [[]],
-      likes: [0]
+      likes: [[]]
     })
   }
 
