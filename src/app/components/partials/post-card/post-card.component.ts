@@ -51,6 +51,7 @@ export class PostCardComponent implements OnInit {
     this._feedService.postComment(postId, this.commentForm.value).subscribe({
       next: (postComm) => {
         console.log(postComm, "commented sucess");
+        this.post.comments?.push(this.commentForm.value)
       },
       error: (err) => {
         console.log("Error in commenting post", err);
@@ -90,6 +91,27 @@ export class PostCardComponent implements OnInit {
         }
       })
     }
+  }
+
+  deleteComment(postId: string, commentId: string) {
+    console.log(commentId, "commentId");
+
+    this._feedService.deleteComment(postId, commentId).subscribe(
+      {
+        next: (deleteComment) => {
+          console.log("comment Deleted sucessfully", deleteComment);
+          const index = this.post.comments?.findIndex((item: any) => item?._id === commentId);
+          if (index !== -1) {
+            this.post.comments?.splice(index, 1);
+            this.commentCounts--;
+          }
+        },
+        error: (err) => {
+          console.log(err, "!!ERROR in deleting comment");
+
+        }
+      }
+    );
   }
 
 }

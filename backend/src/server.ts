@@ -163,7 +163,26 @@ app.post('/api/pro/postComment', async (req, resp) => {
     } catch (error) {
         resp.status(500).json({ error: "Failed to Comment on post" });
     }
-})
+});
+
+app.post("/api/pro/deleteComment", async (req, resp) => {
+    try {
+        const { postId, commentId } = req.body;
+        // Find the post and remove the comment with the specified _id
+        const updatedPost = await Feed.findByIdAndUpdate(
+            postId,
+            { $pull: { comments: { _id: commentId } } },
+        );
+
+        if (!updatedPost) {
+            return resp.status(404).json({ message: "Post not found" });
+        }
+        resp.json({ message: "Comment deleted", post: updatedPost });
+    } catch (error) {
+        console.error("Error deleting comment:", error);
+        resp.status(500).json({ message: "Internal server error" });
+    }
+});
 
 app.listen(PORT, () => {
     console.log("website is running on http://localhost:", PORT);
