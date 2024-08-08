@@ -9,7 +9,7 @@
         {{ post.description }}
     </div>
     <div class="post-actions">
-        <button class="like-button" (click)="likeAction(post?._id)">Like{{post.likes}}</button>
+        <button [ngClass]="isPostLiked ? 'liked' : 'not-liked'" (click)="likeAction(post?._id)">Like {{likesCount}}</button>
         <button class="comment-button">Comment</button>
     </div>
 </div>

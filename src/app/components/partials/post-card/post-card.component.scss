@@ -42,18 +42,28 @@
     margin-bottom: 15px;
 }
 
-.like-button,
-.comment-button {
-    background-color: #007bff;
+.liked {
+    background-color: #337ab7; /* blue color for liked button */
+    color: #ffffff; /* white text color */
     border: none;
     border-radius: 5px;
-    color: white;
+    padding: 5px 10px;
     cursor: pointer;
-    font-size: 1em;
-    padding: 10px 15px;
-}
-
-.like-button:hover,
-.comment-button:hover {
-    background-color: #0056b3;
-}
+  }
+  
+  .liked:hover {
+    background-color: #23527c; /* darker blue on hover */
+  }
+  
+  .not-liked {
+    background-color: #cccccc; /* gray color for not liked button */
+    color: #333333; /* dark gray text color */
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .not-liked:hover {
+    background-color: #aaaaaa; /* lighter gray on hover */
+  }
