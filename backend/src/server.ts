@@ -143,6 +143,18 @@ app.post("/api/pro/likePost", async (req, res) => {
     }
 });
 
+app.post('/api/pro/unlikePost', async (req, resp) => {
+    try {
+        const { postId, userId } = req.body;
+        const unlikeObject = { count: 1, userId: userId };
+        await Feed.updateOne({ _id: postId }, { $pull: { likes: unlikeObject } });
+        resp.json({ message: "Post Unliked successfully" });
+
+    } catch (error) {
+        resp.status(500).json({ error: "Failed to like post" });
+    }
+})
+
 app.listen(PORT, () => {
     console.log("website is running on http://localhost:", PORT);
 

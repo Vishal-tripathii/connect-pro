@@ -11,7 +11,7 @@ export class PostCardComponent implements OnInit {
 
   @Input() post!: any;
   currentUser!: any;
-  isPostLiked!: boolean;
+  isPostLiked: boolean = false;
   likesCount!: any;
 
   constructor(private _feedService: FeedService, private _userService: UserService) {
@@ -26,16 +26,30 @@ export class PostCardComponent implements OnInit {
   }
 
   likeAction(postId: string) {
-    this._feedService.likeAction(postId, this.currentUser?._id).subscribe({
-      next: (like) => {
-        console.log(like, "liked post sucessfully");
-        this.isPostLiked = true;
-        this.likesCount++;
-      },
-      error: (err) => {
-        console.log(err, "err in liking post");
-      }
-    })
+    if (!this.isPostLiked) {
+      this._feedService.likeAction(postId, this.currentUser?._id).subscribe({
+        next: (like) => {
+          console.log(like, "liked post sucessfully");
+          this.isPostLiked = true;
+          this.likesCount++;
+        },
+        error: (err) => {
+          console.log(err, "err in liking post");
+        }
+      })
+    }
+    else {
+      this._feedService.unlikeAction(postId, this.currentUser?._id).subscribe({
+        next: (unlike) => {
+          console.log(unlike, "unliked post sucessfully");
+          this.isPostLiked = false;
+          this.likesCount--;
+        },
+        error: (err) => {
+          console.log(err, "err in unliking post");
+        }
+      })
+    }
   }
 
 }

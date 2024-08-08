@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { IFeed } from '../interfaces/feedInterface';
 import { HttpClient } from '@angular/common/http';
-import { GET_POSTS, LIKE_POST_URL, POST_URL } from '../constants/urls';
+import { GET_POSTS, LIKE_POST_URL, POST_URL, UNLIKE_POST_URL } from '../constants/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +47,18 @@ export class FeedService {
         },
         error: (err) => {
           console.log(err, "error is liking");
+        }
+      })
+    )
+  }
+  unlikeAction(postId: string, userId: string): Observable<any> {
+    return this._http.post<any>(UNLIKE_POST_URL, { postId: postId, userId: userId }).pipe(
+      tap({
+        next: (unlike) => {
+          console.log(unlike, "post unliked sucess");
+        },
+        error: (err) => {
+          console.log(err, "error in unliking this post");
         }
       })
     )
