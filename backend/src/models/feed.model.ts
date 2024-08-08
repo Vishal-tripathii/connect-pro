@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
 
 interface Comment {
-  author: string;
+  name: string;
+  userId: string;
   content: string;
   timestamp: string;
 }
@@ -16,7 +17,8 @@ export interface Feed {
 }
 
 const commentSchema = new Schema<Comment>({
-  author: { type: String, required: true },
+  name: { type: String },
+  userId: { type: String, required: true },
   content: { type: String, required: true },
   timestamp: { type: String, required: true },
 });

@@ -153,6 +153,16 @@ app.post('/api/pro/unlikePost', async (req, resp) => {
     } catch (error) {
         resp.status(500).json({ error: "Failed to like post" });
     }
+});
+
+app.post('/api/pro/postComment', async (req, resp) => {
+    try {
+        const { postId, commentData } = req.body;
+        await Feed.updateOne({ _id: postId }, { $push: { comments: commentData } })
+        resp.json({ message: "Posted Comment successfully" });
+    } catch (error) {
+        resp.status(500).json({ error: "Failed to Comment on post" });
+    }
 })
 
 app.listen(PORT, () => {

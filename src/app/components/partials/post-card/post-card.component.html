@@ -9,7 +9,27 @@
         {{ post.description }}
     </div>
     <div class="post-actions">
-        <button [ngClass]="isPostLiked ? 'liked' : 'not-liked'" (click)="likeAction(post?._id)">Like {{likesCount}}</button>
-        <button class="comment-button">Comment</button>
+        <button [ngClass]="isPostLiked ? 'liked' : 'not-liked'" (click)="likeAction(post?._id)">Like
+            {{likesCount}}</button>
+        <button class="open-comments-btn" (click)="toggleComments()">Comments {{commentCounts}}</button>
+    </div>
+
+    <div class="comment-container" *ngIf="showComments">
+        <form [formGroup]="commentForm" (ngSubmit)="submit(post?._id)" class="comment-form">
+            <input type="text" placeholder="Write a comment..." formControlName="content" class="comment-input">
+            <button type="submit" [disabled]="!commentForm.dirty || !commentForm.valid" class="submit-btn">
+                Post Comment
+            </button>
+        </form>
+
+        <div class="comments-list">
+            <div *ngFor="let item of post.comments" class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-author">{{item.name}}</span>
+                    <span class="comment-timestamp">{{item.timestamp | date:'short'}}</span>
+                </div>
+                <p class="comment-content">{{item.content}}</p>
+            </div>
+        </div>
     </div>
 </div>
