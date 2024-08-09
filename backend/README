@@ -45,3 +45,10 @@ so basically, adding directly the users who liked the post is bettr approach
 bechause then i can have validation in frontend tht wheter i liked this post or not
 if not, will show different UI, if yes then how diffrent UI
 also, need to add unfollow logic
+
+---------------------------
+-Added the deletion logic and server method as well
+-but currently all the users can see the deletioon button
+-for egL if i visit tonic profile, i can see the delete button there as well which should not be the behaviour
+- i need to display the delete functionality only when current user is logged in on app-post-card i think
+-will change in next commit
