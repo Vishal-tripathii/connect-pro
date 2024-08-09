@@ -99,46 +99,50 @@ app.get('/api/pro/getExistingUsers', async (req, resp) => {
 
 app.post('/api/pro/follow', async (req, resp) => {
     try {
-        const { followId, userId } = req.body;
-        const currentUser = await User.findById(userId); // find the currentUser
-        const userToFollow = await User.findById(followId); // find the user to follow
-
-        if (!currentUser || !userToFollow) {
-            resp.status(404).json({ error: "User not found" });
-        } else if (currentUser.following.includes(followId)) {
-            resp.status(400).json({ error: "User is already in your following list" });
-        } else {
-            currentUser.following.push(followId)
-            await currentUser.save();
-            resp.status(200).json({ message: 'User followed successfully' });
+      const { followId, userId } = req.body;
+      const currentUser = await User.findById(userId); // find the currentUser
+      const userToFollow = await User.findById(followId); // find the user to follow
+  
+      if (!currentUser || !userToFollow) {
+        resp.status(404).json({ error: "User not found" });
+      } else if (currentUser.following.some((id) => id.equals(followId))) {
+        resp.status(400).json({ error: "User is already in your following list" });
+      } else {
+        currentUser.following.push(followId);
+        if (!userToFollow.followers.some((id) => id.equals(userId))) {
+          userToFollow.followers.push(userId);
         }
+        await currentUser.save();
+        await userToFollow.save();
+        resp.status(200).json({ message: 'User followed successfully' });
+      }
     } catch (error) {
-        resp.status(500).json({ error: error });
+      resp.status(500).json({ error: error });
     }
-});
+  });
 
-app.post('/api/pro/unfollow', async (req, res) => {
+  app.post('/api/pro/unfollow', async (req, res) => {
     try {
-        const { followId, userId } = req.body;
-        const currentUser = await User.findById(userId);
-        const userToUnfollow = await User.findById(followId);
-
-        if (!currentUser || !userToUnfollow) {
-            res.status(404).json({ error: "User not found" });
+      const { followId, userId } = req.body;
+      const currentUser = await User.findById(userId);
+      const userToUnfollow = await User.findById(followId);
+  
+      if (!currentUser || !userToUnfollow) {
+        res.status(404).json({ error: "User not found" });
         } else if (currentUser.following.includes(followId)) {
             const index = currentUser.following.findIndex((item: any) => item._id.equals(followId));
-            if (index !== -1) {
-                currentUser.following.splice(index, 1);
-                await currentUser.save();
-                res.status(200).json({ message: 'User Unfollowed successfully' });
-            }
-        } else {
-            res.status(400).json({ error: "You are not following this user" });
+        if (index !== -1) {
+          currentUser.following.splice(index, 1);
+          await currentUser.save();
+          res.status(200).json({ message: 'User Unfollowed successfully' });
         }
+      } else {
+        res.status(400).json({ error: "You are not following this user" });
+      }
     } catch (error) {
-        res.status(500).send({ error: "Some error occurred" });
+      res.status(500).send({ error: "Some error occurred" });
     }
-});
+  });
 
 app.post("/api/pro/likePost", async (req, res) => {
     try {
