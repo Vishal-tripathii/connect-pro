@@ -4,7 +4,20 @@
             <div class="post-author">{{ post.author }}</div>
             <div class="post-timestamp">{{ post.timestamp | date:'short' }}</div>
         </div>
-        <button (click)="deletePost(post?._id)" class="delete-post-btn">Delete Post</button>
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngIf="isCurrentUser()" (click)="deletePost(post?._id)">
+                <mat-icon>delete</mat-icon>
+                <span>delete post</span>
+            </button>
+            <!-- <button mat-menu-item>
+                <mat-icon>edit</mat-icon>
+                <span>Edit post</span>
+            </button> -->
+        </mat-menu>
+        <!-- <button *ngIf="isCurrentUser()" (click)="deletePost(post?._id)" class="delete-post-btn">Delete Post</button> -->
     </div>
     <div class="post-content">
         {{ post.description }}

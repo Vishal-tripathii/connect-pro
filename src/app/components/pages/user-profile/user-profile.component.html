@@ -3,9 +3,9 @@
         <div class="profile-card">
             <div class="profile-header">
                 <h2>User Profile</h2>
-                <button class="follow-button" [disabled]="isFollowing" 
-                (click)="follow()">{{isFollowing ? 'Following' : 'Follow'}}</button>
-                <button *ngIf="isFollowing"(click)="unfollow()">Unfollow </button>
+                <button class="follow-button" [disabled]="isFollowing" (click)="follow()">{{isFollowing ? 'Following' :
+                    'Follow'}}</button>
+                <button *ngIf="isFollowing" (click)="unfollow()">Unfollow </button>
             </div>
             <div class="profile-info" *ngIf="userProfile">
                 <p><strong>Name:</strong> {{ userProfile.name }}</p>
@@ -17,7 +17,7 @@
     <div class="task-container" *ngFor="let item of userData">
 
         <div class="task-section">
-            <app-post-card [post]="item"></app-post-card>
+            <app-post-card [post]="item" [loggedInUser]="userProfile?._id"></app-post-card>
         </div>
     </div>
 </div>

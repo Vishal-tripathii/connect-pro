@@ -18,6 +18,8 @@ import { CreatePostComponent } from './components/partials/create-post/create-po
 import { SearchComponent } from './components/partials/search/search.component';
 import { UserProfileComponent } from './components/pages/user-profile/user-profile.component';
 import { PostCardComponent } from './components/partials/post-card/post-card.component';
+import {MatMenuModule} from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { PostCardComponent } from './components/partials/post-card/post-card.com
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [
     provideAnimationsAsync()

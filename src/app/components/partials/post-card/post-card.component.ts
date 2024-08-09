@@ -5,11 +5,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-post-card',
   templateUrl: './post-card.component.html',
-  styleUrl: './post-card.component.scss'
+  styleUrl: './post-card.component.scss',
+  
 })
 export class PostCardComponent implements OnInit {
 
   @Input() post!: any;
+  @Input() loggedInUser!: any; // to check if user came from feed page, sp that he only can see delete button
   currentUser!: any;
   isPostLiked: boolean = false;
   likesCount!: any;
@@ -117,6 +119,10 @@ export class PostCardComponent implements OnInit {
     if (_postId) {
       this.deletePostEvent.emit(_postId)
     }
+  }
+
+  isCurrentUser(): boolean {
+    return (this.post.id === this.loggedInUser?._id)
   }
 
 }

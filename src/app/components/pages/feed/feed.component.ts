@@ -10,30 +10,14 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './feed.component.scss'
 })
 export class FeedComponent implements OnInit {
-  post =
-    {
-      id: '1',
-      author: 'Jane Doe',
-      authorProfilePicture: 'https://via.placeholder.com/40',
-      content: 'Excited to share that I have started a new position at Company XYZ!',
-      timestamp: new Date('2023-01-01T10:00:00Z'),
-      likes: 25,
-      comments: [
-        {
-          id: 'c1',
-          author: 'John Smith',
-          content: 'Congratulations, Jane!',
-          timestamp: new Date('2023-01-01T11:00:00Z')
-        },
-      ]
-    }
 
-  feedTask!: IFeed[]
+  feedTask!: IFeed[];
+  currentUser!: any;
 
   constructor(private _feedService: FeedService, private _userService: UserService) {
-    let currentUser = this._userService.getCurrentUser()
+    this.currentUser = this._userService.getCurrentUser()
     let taskObservable: Observable<any>
-    taskObservable = this._feedService.getPost(currentUser._id);
+    taskObservable = this._feedService.getPost(this.currentUser?._id);
     taskObservable.subscribe((serverResponse: any) => {
       this.sortPostsByTime(serverResponse)
     })
