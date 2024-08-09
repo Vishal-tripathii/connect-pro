@@ -66,6 +66,15 @@ app.get('/api/pro/getPosts', async (req, resp) => {
     } catch (error) {
         resp.status(500).send(error)
     }
+});
+app.get('/api/pro/profilePost', async (req, resp) => {
+    try {
+        const { userId } = req.query;
+        const post = await Feed.find({ id: userId })
+        resp.json(post);
+    } catch (error) {
+        resp.status(500).send(error)
+    }
 })
 
 app.post('/api/pro/post', async (req, resp) => {

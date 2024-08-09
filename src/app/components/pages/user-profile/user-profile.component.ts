@@ -34,12 +34,12 @@ export class UserProfileComponent implements OnInit {
       this.isFollowing = this.currentUser?.following?.includes(this.userProfile?._id);
 
     });
-    
+
     // fetching users data
-    this._feedService.getPost(this.userId).subscribe((resp: any) => {
+    this._feedService.getProfilePosts(this.userId).subscribe((resp: any) => {
       this.userData = resp;
     })
-    
+
   }
 
   follow() {
@@ -56,7 +56,7 @@ export class UserProfileComponent implements OnInit {
 
   unfollow() {
     console.log("unfollowed clickeds");
-    
+
     this._userService.unfollow(this.userProfile._id, this.currentUser._id).subscribe({
       next: () => {
         this.isFollowing = false;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { IFeed } from '../interfaces/feedInterface';
 import { HttpClient } from '@angular/common/http';
-import { DELETE_COMMENT_URL, DELETE_POST_URL, GET_POSTS, LIKE_POST_URL, POST_COMMENT_URL, POST_URL, UNLIKE_POST_URL } from '../constants/urls';
+import { DELETE_COMMENT_URL, DELETE_POST_URL, GET_POSTS, GET_PROFILE_POST, LIKE_POST_URL, POST_COMMENT_URL, POST_URL, UNLIKE_POST_URL } from '../constants/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,10 @@ export class FeedService {
         }
       })
     )
+  }
+
+  getProfilePosts(userId: string): Observable<IFeed> {
+    return this._http.get<IFeed>(`${GET_PROFILE_POST}?userId=${userId}`);
   }
 
   likeAction(postId: string, userId: string): Observable<any> {
