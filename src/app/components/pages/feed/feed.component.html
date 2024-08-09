@@ -1,5 +1,4 @@
 <!-- post.component.html -->
 <div class="post" *ngFor="let post of feedTask">
-    <app-post-card [post]="post"></app-post-card>
-  </div>
-  
+  <app-post-card [post]="post" (deletePostEvent)="handlePostDeletion($event)"></app-post-card>
+</div>

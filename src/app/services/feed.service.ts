@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { IFeed } from '../interfaces/feedInterface';
 import { HttpClient } from '@angular/common/http';
-import { DELETE_COMMENT_URL, GET_POSTS, LIKE_POST_URL, POST_COMMENT_URL, POST_URL, UNLIKE_POST_URL } from '../constants/urls';
+import { DELETE_COMMENT_URL, DELETE_POST_URL, GET_POSTS, LIKE_POST_URL, POST_COMMENT_URL, POST_URL, UNLIKE_POST_URL } from '../constants/urls';
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +79,10 @@ export class FeedService {
   }
   deleteComment(postId: string, commentId: string): Observable<any> {
     return this._http.post(DELETE_COMMENT_URL, { postId: postId, commentId: commentId });
+  }
+
+  deletePost(_postId: string): Observable<any> {
+    return this._http.post<any>(DELETE_POST_URL, { _postId: _postId });
   }
 
 }

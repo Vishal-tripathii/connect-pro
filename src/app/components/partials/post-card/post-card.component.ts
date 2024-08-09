@@ -1,9 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FeedService } from '../../../services/feed.service';
 import { UserService } from '../../../services/user.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { timestamp } from 'rxjs';
-
 @Component({
   selector: 'app-post-card',
   templateUrl: './post-card.component.html',
@@ -20,6 +18,7 @@ export class PostCardComponent implements OnInit {
   isSubmitted: boolean = false;
   showComments: boolean = false;
   commentCounts!: number;
+  @Output() deletePostEvent = new EventEmitter();
 
   constructor(private _feedService: FeedService,
     private _userService: UserService,
@@ -112,6 +111,12 @@ export class PostCardComponent implements OnInit {
         }
       }
     );
+  }
+
+  deletePost(_postId: string) {// i am not able to Update the UI here so i need to handle the deletion at parent level
+    if (_postId) {
+      this.deletePostEvent.emit(_postId)
+    }
   }
 
 }

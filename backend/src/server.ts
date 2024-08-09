@@ -184,6 +184,16 @@ app.post("/api/pro/deleteComment", async (req, resp) => {
     }
 });
 
+app.post('/api/pro/deletePost', async (req, resp) => {
+    try {
+        const { _postId } = req.body;
+        const deletePost = await Feed.deleteOne({ _id: _postId })
+        resp.status(200).json({ deletePost: "post deleted" })
+    } catch (error) {
+        resp.status(500).json({ error: "errorrrr" })
+    }
+})
+
 app.listen(PORT, () => {
     console.log("website is running on http://localhost:", PORT);
 

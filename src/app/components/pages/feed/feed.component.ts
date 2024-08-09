@@ -52,4 +52,18 @@ export class FeedComponent implements OnInit {
     });
     this.feedTask = posts;
   }
+
+  handlePostDeletion(postId: any) {
+    this._feedService.deletePost(postId).subscribe({
+      next: (del) => {
+        const index = this.feedTask.findIndex(item => item._id === postId)
+        if (index !== -1) {
+          this.feedTask.splice(index, 1);
+        }
+      },
+      error: (err) => {
+        console.log("Error deleting the post: ", err);
+      }
+    })
+  }
 }
